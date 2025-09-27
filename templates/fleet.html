@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Автопарк - Taxiver{% endblock %}
+{% block description %}Наш автопарк междугородних такси. Эконом, комфорт, бизнес и премиум класс автомобилей для поездок между городами.{% endblock %}
+
+{% block content %}
+<!-- Car Fleet Section -->
+<section class="fleet-section section-py">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h1 class="mb-3">Наш автопарк</h1>
+                <p class="text-muted">Выберите подходящий класс автомобиля для вашей поездки</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for tier_key, tier_info in pricing_tiers.items() %}
+            <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                <div class="car-card card h-100 border-0 shadow-sm">
+                    <div class="car-image-wrapper">
+                        <img src="{{ url_for('static', filename='img/' + tier_info.image_name + '.jpg') }}" 
+                             alt="{{ tier_info.name }}" class="car-image"
+                             onerror="this.src='{{ url_for('static', filename='img/placeholder-car.jpg') }}'">
+                        <div class="car-price-badge">{{ tier_info.price_per_km }} ₽/км</div>
+                    </div>
+                    <div class="card-body text-center">
+                        <h3 class="h5">{{ tier_info.name }}</h3>
+                        <p class="text-muted mb-3">{{ tier_info.description }}</p>
+                        <div class="car-features mb-3">
+                            <div class="feature-item">
+                                <i class="fas fa-user"></i>
+                                <span>4 пассажира</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-suitcase"></i>
+                                <span>2 чемодана</span>
+                            </div>
+                        </div>
+                        <a href="{{ url_for('calculator') }}" class="btn btn-outline-primary w-100">Заказать</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="{{ url_for('booking') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-car me-2"></i>Заказать такси
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Car Comparison Section -->
+<section class="comparison-section bg-light section-py">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="mb-3">Сравнение классов автомобилей</h2>
+                <p class="text-muted">Выберите подходящий вариант для вашей поездки</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Класс</th>
+                                <th>Стоимость</th>
+                                <th>Вместимость</th>
+                                <th>Комфорт</th>
+                                <th>Дополнительные услуги</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Эконом</strong></td>
+                                <td>30 ₽/км</td>
+                                <td>3 пассажира</td>
+                                <td>Базовый комфорт</td>
+                                <td>Минимальный багаж</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Комфорт</strong></td>
+                                <td>45 ₽/км</td>
+                                <td>4 пассажира</td>
+                                <td>Повышенный комфорт</td>
+                                <td>Стандартный багаж</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Бизнес</strong></td>
+                                <td>60 ₽/км</td>
+                                <td>3 пассажира</td>
+                                <td>Премиум комфорт</td>
+                                <td>Приоритетное обслуживание</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Премиум</strong></td>
+                                <td>80 ₽/км</td>
+                                <td>3 пассажира</td>
+                                <td>Максимальный комфорт</td>
+                                <td>Все включено</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

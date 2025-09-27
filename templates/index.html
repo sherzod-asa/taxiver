@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}Taxiver - Заказ междугороднего такси по России{% endblock %}
+{% block description %}Заказ междугороднего такси по России. Комфортные поездки между городами по фиксированным ценам. Эконом, комфорт, бизнес и премиум класс.{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section section-py">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="hero-content">
+                    <h1 class="hero-title">Комфортные междугородние поездки по России</h1>
+                    <p class="hero-subtitle">Надёжные перевозки с фиксированными ценами и профессиональными водителями. Более 1000 довольных клиентов по всей стране.</p>
+                    
+                    <div class="d-flex flex-wrap gap-3 mb-4">
+                        <a href="{{ url_for('calculator') }}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-calculator me-2"></i>Рассчитать стоимость
+                        </a>
+                        <a href="{{ url_for('booking') }}" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-car me-2"></i>Заказать такси
+                        </a>
+                    </div>
+                    
+                    <div class="d-flex flex-wrap gap-5 mt-4">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                <i class="fas fa-check text-white"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Фиксированные цены</h6>
+                                <small class="text-muted">Без скрытых платежей</small>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                <i class="fas fa-check text-white"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Круглосуточно</h6>
+                                <small class="text-muted">Работаем 24/7</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="position-relative">
+                    <div class="card border-0 shadow-lg" style="transform: rotate(3deg);">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="card-title mb-0">Москва → Санкт-Петербург</h5>
+                                <span class="badge bg-primary">Комфорт</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted">Расстояние:</span>
+                                <span>706 км</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted">Время в пути:</span>
+                                <span>~8 часов</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span class="text-muted">Стоимость:</span>
+                                <span class="fw-bold text-primary">31 770 ₽</span>
+                            </div>
+                            <button class="btn btn-outline-primary w-100">Заказать эту поездку</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card border-0 shadow-lg position-absolute" style="top: 50px; left: -30px; transform: rotate(-2deg); z-index: -1;">
+                        <div class="card-body p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                    <i class="fas fa-car text-white"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Комфорт класс</h6>
+                                    <small class="text-muted">Skoda Octavia</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="section-py bg-light">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="mb-3">Почему выбирают нас</h2>
+                <p class="text-muted">Мы предлагаем качественный сервис с заботой о вашем комфорте и безопасности</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="feature-card text-center">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>Безопасность</h4>
+                    <p class="text-muted">Все наши водители проходят тщательную проверку и имеют большой опыт работы.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="feature-card text-center">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h4>Фиксированные цены</h4>
+                    <p class="text-muted">Стоимость поездки известна заранее и не меняется во время пути.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="feature-card text-center">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h4>Пунктуальность</h4>
+                    <p class="text-muted">Мы ценим ваше время и всегда приезжаем точно к указанному времени.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section - улучшаем контрастность -->
+<section class="cta-section section-py">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 mb-4 mb-lg-0">
+                <h2 class="text-white mb-3">Готовы к поездке?</h2>
+                <p class="lead mb-0">Рассчитайте стоимость прямо сейчас или закажите такси онлайн</p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <a href="{{ url_for('calculator') }}" class="btn btn-light btn-lg me-2">Калькулятор</a>
+                <a href="{{ url_for('booking') }}" class="btn btn-outline-light btn-lg">Заказать</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Калькулятор стоимости - Taxiver{% endblock %}
+{% block description %}Рассчитайте стоимость поездки между городами России. Точный расчет расстояния и цены для всех тарифов.{% endblock %}
+
+{% block content %}
+<!-- Calculator Section -->
+<section class="calculator-section py-5 mt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="calculator-card">
+                    <h1 class="text-center mb-4">Калькулятор стоимости поездки</h1>
+                    
+                    <form id="calculatorForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="fromCity" class="form-label">Откуда</label>
+                                <div class="city-input-wrapper">
+                                    <input type="text" class="form-control city-input" id="fromCity" placeholder="Город отправления" required>
+                                    <div class="suggestions-dropdown" id="fromSuggestions"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="toCity" class="form-label">Куда</label>
+                                <div class="city-input-wrapper">
+                                    <input type="text" class="form-control city-input" id="toCity" placeholder="Город назначения" required>
+                                    <div class="suggestions-dropdown" id="toSuggestions"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <span class="btn-text">Рассчитать стоимость</span>
+                                <span class="btn-loading d-none">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div id="calculatorError" class="alert alert-danger mt-3 d-none">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <span id="errorMessage"></span>
+                    </div>
+                    
+                    <div id="calculatorResults" class="calculator-results mt-4 d-none">
+                        <div class="text-center mb-4">
+                            <h4>Результаты расчета</h4>
+                            <p>Расстояние: <strong id="distanceResult">0</strong> км</p>
+                            <p>Примерное время в пути: <strong id="timeResult">0</strong> часов</p>
+                        </div>
+                        
+                        <h5 class="text-center mb-3">Стоимость поездки</h5>
+                        <div class="row" id="pricingCards">
+                            <!-- Pricing cards will be inserted here -->
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <a href="{{ url_for('booking') }}" class="btn btn-success btn-lg">
+                                <i class="fas fa-car me-2"></i>Заказать поездку
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/calculator.js') }}"></script>
+{% endblock %}

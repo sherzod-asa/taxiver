@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /private
+Disallow: /login
+
+Sitemap: https://taxiver.ru/sitemap.xml
