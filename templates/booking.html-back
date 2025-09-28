@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Заказать такси - Taxiver{% endblock %}
+{% block description %}Заказ междугороднего такси онлайн. Быстрое оформление заявки, фиксированные цены, комфортные автомобили.{% endblock %}
+
+{% block content %}
+<!-- Booking Section -->
+<section class="booking-section py-5 mt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="calculator-card">
+                    <h1 class="text-center mb-4">Заказать такси</h1>
+                    
+                    <form id="bookingForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="fullName" class="form-label">ФИО</label>
+                                <input type="text" class="form-control" id="fullName" placeholder="Иванов Иван Иванович" required>
+                                <div class="invalid-feedback">Пожалуйста, укажите полное ФИО</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="phone" class="form-label">Телефон</label>
+                                <input type="tel" class="form-control" id="phone" placeholder="+7 (___) ___-__-__" required>
+                                <div class="invalid-feedback">Пожалуйста, укажите корректный номер телефона</div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="fromCityBooking" class="form-label">Откуда</label>
+                                <input type="text" class="form-control" id="fromCityBooking" placeholder="Город отправления" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="toCityBooking" class="form-label">Куда</label>
+                                <input type="text" class="form-control" id="toCityBooking" placeholder="Город назначения" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="date" class="form-label">Дата поездки</label>
+                                <input type="date" class="form-control" id="date" min="{{ min_date }}" required>
+                                <div class="invalid-feedback">Пожалуйста, выберите дату</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="comments" class="form-label">Комментарий (необязательно)</label>
+                                <textarea class="form-control" id="comments" rows="1" placeholder="Особенности поездки"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div id="bookingSuccess" class="alert alert-success d-none">
+                            <i class="fas fa-check-circle me-2"></i>Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.
+                        </div>
+                        
+                        <div id="bookingError" class="alert alert-danger d-none">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <span id="bookingErrorMessage"></span>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <span class="btn-text">Заказать такси</span>
+                                <span class="btn-loading d-none">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Set min date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('date').min = today;
+    
+    // Simple phone input with auto +7 prefix
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        phoneInput.addEventListener('focus', function() {
+            if (!this.value.startsWith('+7')) {
+                this.value = '+7';
+            }
+        });
+    }
+});
+</script>
+{% endblock %}

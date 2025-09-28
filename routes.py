@@ -218,7 +218,12 @@ def submit_request():
         from_city = data.get('from_city', '').strip()
         to_city = data.get('to_city', '').strip()
         date_str = data.get('date', '').strip()
+        passengers = data.get('passengers', '1')
         comments = data.get('comments', '').strip()
+
+        # Basic validation
+        if not all([full_name, phone, from_city, to_city, date_str]):
+            return jsonify({'success': False, 'message': 'Пожалуйста, заполните все обязательные поля'}), 400
 
         # Format date
         try:
@@ -234,6 +239,7 @@ def submit_request():
             f"*Телефон:* {phone}\n"
             f"*Маршрут:* {from_city} → {to_city}\n"
             f"*Дата:* {formatted_date}\n"
+            f"*Пассажиры:* {passengers}\n"
         )
         
         if comments:
@@ -243,18 +249,22 @@ def submit_request():
             
         message += "Срочно свяжитесь с клиентом!"
 
-        # Send to Telegram
-        url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
-        payload = {
-            'chat_id': TELEGRAM_CHAT_ID,
-            'text': message,
-            'parse_mode': 'Markdown'
-        }
+        # Send to Telegram (if configured)
+        if TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID:
+            url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+            payload = {
+                'chat_id': TELEGRAM_CHAT_ID,
+                'text': message,
+                'parse_mode': 'Markdown'
+            }
 
-        response = requests.post(url, json=payload)
-        if response.status_code != 200:
-            logging.error(f"Telegram API error: {response.text}")
-            return jsonify({'success': False, 'message': 'Ошибка отправки уведомления'}), 500
+            response = requests.post(url, json=payload)
+            if response.status_code != 200:
+                logging.error(f"Telegram API error: {response.text}")
+                # Don't fail the request if Telegram fails
+        else:
+            # Log to console if Telegram not configured
+            print("New booking request:", message)
 
         return jsonify({'success': True})
 
